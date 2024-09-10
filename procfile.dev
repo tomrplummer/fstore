@@ -1,0 +1,2 @@
+api: subcontract -d fstore -- go run ./cmd/tcp
+web: subcontract -d fstore-web -- ./bin/dev

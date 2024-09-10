@@ -1,0 +1,19 @@
+%form{:action => "/login", :method => "post"}
+  %div.border.bg-white.shadow-lg.stack-md.rounded-md.bg-neutral.text-neutral-content{style: "padding: 4rem; border-radius: .5rem; max-width: 30rem; margin:auto"}
+    %span.font-semibold.text-gray-600= "Login"
+    %label.form-control
+      %div.label
+        %span.label-text.text-neutral-content= "Email"
+      %input.bottom-border{autofocus: :true, value: @user.username, :name => :username}
+    %label.form-control
+      %div.label
+        %span.label-text.text-neutral-content= "Password"
+      %input.bottom-border{value: @user.password_hash, type: :password, :name => :password}
+    - if flash[:error]
+      %div.bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.relative.text-sm
+        %span.block.sm:inline= flash[:error]
+    %div.stack-lg.mt-12
+      %div.flex.flex-row.justify-center
+        %button.btn.btn-accent.w-56= "Login"
+      %div.flex.flex-row.justify-center
+        %a.link{style: "font-size: .85rem;", href: "/signup"}= "Sign up"

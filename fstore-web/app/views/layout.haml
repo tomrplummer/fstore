@@ -1,0 +1,33 @@
+%html.bg-gray-50.text-gray-700{class: "h-[100vh]"}
+  %head
+    %link{:href => "/stylesheets/application.css", :rel=>"stylesheet"}
+    -# %link{href:"https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css", rel:"stylesheet", type:"text/css"}
+    -# %link{:href => "/stylesheets/milligram.css", :rel=>"stylesheet"}
+    %link{:href => "/stylesheets/custom.css", :rel=>"stylesheet"}
+    %script{src: "/js/dom.js"}
+
+
+  %body.h-full
+    %div.text-red-400.text-red-400.h-12
+      %div.h-full.grid{class: "grid-cols-[10rem_1fr]"}
+        %div.flex.justify-center.items-center.bg-red-400
+          %a.text-white.text-2xl{:href => "/"}= "fstore"
+        %div.flex.justify-end.items.center.pr-8
+          %div.flex.flex-row.items-center.text-xl.gap-1.text-gray-600
+            - if current_user
+              %a.flex.gap-1.cursor-pointer.link{:href => "/user/profile/#{current_user[:id]}"}
+                %button.btn.btn-square.btn-ghost
+                  %svg{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke_width:"1.5",stroke:"currentColor",class:"size-6"}
+                    %path{stroke_linecap:"round",stroke_linejoin:"round",d:"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"}
+                = current_user[:full_name] || current_user[:username]
+            -if current_user.nil?
+              %a.link{href: "/login"}= "Login"
+    %div.grid{class: "grid-cols-[10rem_1fr] h-[calc(100vh_-_3rem)]"}
+      %div.py-8.bg-red-400
+        %div.px-1.flex.flex-col.gap-4.text-white.items-center
+          %a.rounded-md.text-center.py-1.w-full{class: "hover:bg-gray-500 hover:shadow-md", href: "/uploads"} All
+          %a.rounded-md.text-center.py-1.w-full{class: "hover:bg-gray-500 hover:shadow-md", href: "/uploads?filter=owned"} Owned
+          %a.rounded-md.text-center.py-1.w-full{class: "hover:bg-gray-500 hover:shadow-md", href: "/uploads?filter=shared"} Shared with me
+      %div.p-8
+        %div.responsive-container
+          != yield
